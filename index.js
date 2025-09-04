@@ -17,7 +17,7 @@ const displayLevel = (level) => {
   wordContainer.innerHTML = ``;
 
   if (level.length == 0) {
-    wordContainer.innerHTML = `<div class="p-10">
+    wordContainer.innerHTML = `<div class="p-10 col-span-full">
     <img class="mx-auto" src="./assets/alert-error.png" alt="">
       <p class="text-lg mb-5">এখানে এখনো কোন Lesson যুক্ত করা হয়নি
 </p>
@@ -29,7 +29,7 @@ const displayLevel = (level) => {
   level.forEach((word) => {
     const wordCard = document.createElement("div");
     wordCard.innerHTML = `
-    <div class="bg-white rounded-2xl w-md p-10 space-y-5 shadow-xl h-full">
+    <div class="bg-white rounded-2xl p-10 space-y-5 shadow-xl h-full">
         <h1 class="text-4xl font-bold">${word.word}</h1>
         <h2 class="text-xl">Meaning / pronunciation</h2>
         <h2 class="text-2xl mb-10">${word.meaning} / ${word.pronunciation}</h2>
