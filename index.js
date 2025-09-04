@@ -1,9 +1,19 @@
+// Showing dynamic synonyms
 const showSyn = (synonyms) => {
   const newTag = synonyms.map((word) => `<span class="btn">${word}</span>`);
   const oneLine = newTag.join(" ");
   return oneLine;
 };
-
+// Manage spinner
+const spinner = (show) => {
+  if (show == true) {
+    document.getElementById("spinner").classList.remove("hidden");
+    document.getElementById("word-container").classList.add("hidden");
+  } else {
+    document.getElementById("word-container").classList.remove("hidden");
+    document.getElementById("spinner").classList.add("hidden");
+  }
+};
 const lessonLoad = () => {
   const url = "https://openapi.programming-hero.com/api/levels/all";
   fetch(url)
@@ -19,6 +29,7 @@ const removeActive = () => {
 };
 // Lessons word Get from API
 const loadLevel = (id) => {
+  spinner(true);
   const url = `https://openapi.programming-hero.com/api/level/${id}`;
   fetch(url)
     .then((res) => res.json())
@@ -38,6 +49,7 @@ const displayLevel = (level) => {
       <p class="text-lg mb-5">এখানে এখনো কোন Lesson যুক্ত করা হয়নি</p>
       <h1 class="text-4xl font-bold">পরের Lesson Select করুন।</h1>
     </div>;`;
+    spinner(false);
     return;
   }
 
@@ -70,6 +82,7 @@ const displayLevel = (level) => {
     `;
     wordContainer.appendChild(wordCard);
   });
+  spinner(false);
 };
 
 /**
