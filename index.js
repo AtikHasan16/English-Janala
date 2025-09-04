@@ -15,6 +15,16 @@ const displayLevel = (level) => {
   console.log(level);
   const wordContainer = document.getElementById("word-container");
   wordContainer.innerHTML = ``;
+
+  if (level.length == 0) {
+    wordContainer.innerHTML = `<div class="p-10">
+      <p class="text-lg mb-5">এখানে এখনো কোন Lesson যুক্ত করা হয়নি
+</p>
+      <h1 class="text-4xl font-bold">পরের Lesson Select করুন।</h1>
+    </div>;`;
+    return;
+  }
+
   level.forEach((word) => {
     const wordCard = document.createElement("div");
     wordCard.innerHTML = `
