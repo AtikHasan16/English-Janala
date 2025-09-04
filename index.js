@@ -1,3 +1,10 @@
+// Pronounce Word
+function pronounceWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-EN"; // English
+  window.speechSynthesis.speak(utterance);
+}
+
 // Showing dynamic synonyms
 const showSyn = (synonyms) => {
   const newTag = synonyms.map((word) => `<span class="btn">${word}</span>`);
@@ -67,16 +74,14 @@ const displayLevel = (level) => {
       word.pronunciation ? word.pronunciation : "কোন শব্দ পাওয়া যায়নি"
     }</h2>
         <div class="flex justify-between">
-          <p
-            class="bg-sky-100 p-3 rounded-md hover:bg-sky-400 transition-colors duration-300">
-            <i onclick="loadModal(${
-              word.id
-            })"  class="fa-solid fa-circle-info"></i>
-          </p>
-          <p
-            class="bg-sky-100 p-3 rounded-md hover:bg-sky-400 transition-colors duration-300">
+          <button onclick="loadModal(${word.id})"
+            class="bg-sky-100 btn hover:bg-sky-400 transition-colors duration-300">
+            <i class="fa-solid fa-circle-info"></i>
+          </button>
+          <button onclick="pronounceWord('${word.word}')" 
+            class="bg-sky-100 btn hover:bg-sky-400 transition-colors duration-300">
             <i class="fa-solid fa-volume-high"></i>
-          </p>
+          </button>
         </div>
       </div>
     `;
@@ -114,13 +119,6 @@ const loadModal = async (id) => {
   displayModal(details.data);
 };
 
-// Pronounce Word
-function pronounceWord(word) {
-  const utterance = new SpeechSynthesisUtterance(word);
-  utterance.lang = "en-EN"; // English
-  window.speechSynthesis.speak(utterance);
-}
-
 // Modal Display function
 const displayModal = (word) => {
   const modalContainer = document.getElementById("modal-container");
@@ -128,9 +126,9 @@ const displayModal = (word) => {
           <div class="p-6 space-y-4 poppins">
             <h1 class="text-3xl font-bold">${
               word.word
-            } (<i onclick="pronounceWord(${
-    word.word
-  })" class="fa-solid fa-microphone-lines"></i>: ${word.pronunciation})</h1>
+            } (<i class="fa-solid fa-microphone-lines"></i>: ${
+    word.pronunciation
+  })</h1>
             <div>
               <p class="font-semibold pb-2">Meaning</p>
               <p>${word.meaning}</p>
