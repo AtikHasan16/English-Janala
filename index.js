@@ -1,17 +1,23 @@
+const showSyn = (synonyms) => {
+  const newTag = synonyms.map((word) => `<span class="btn">${word}</span>`);
+  const oneLine = newTag.join(" ");
+  return oneLine;
+};
+
 const lessonLoad = () => {
   const url = "https://openapi.programming-hero.com/api/levels/all";
   fetch(url)
     .then((response) => response.json())
     .then((data) => displayLesson(data));
 };
-
+// Remove button style
 const removeActive = () => {
   const remActive = document.querySelectorAll(".lesson-btn");
   remActive.forEach((element) => {
     element.classList.remove("active");
   });
 };
-
+// Lessons word Get from API
 const loadLevel = (id) => {
   const url = `https://openapi.programming-hero.com/api/level/${id}`;
   fetch(url)
@@ -21,6 +27,8 @@ const loadLevel = (id) => {
   const activeBtn = document.getElementById(`lesson-btn-${id}`);
   activeBtn.classList.add("active");
 };
+
+//  lesson word Card
 const displayLevel = (level) => {
   const wordContainer = document.getElementById("word-container");
   wordContainer.innerHTML = ``;
@@ -84,6 +92,7 @@ const displayLevel = (level) => {
  * 
  */
 
+// Modal Details Get from API
 const loadModal = async (id) => {
   const url = `https://openapi.programming-hero.com/api/word/${id}`;
 
@@ -92,12 +101,23 @@ const loadModal = async (id) => {
   displayModal(details.data);
 };
 
+// Pronounce Word
+function pronounceWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-EN"; // English
+  window.speechSynthesis.speak(utterance);
+}
+
+// Modal Display function
 const displayModal = (word) => {
   const modalContainer = document.getElementById("modal-container");
-
   modalContainer.innerHTML = `
           <div class="p-6 space-y-4 poppins">
-            <h1 class="text-3xl font-bold">${word.word} (🎙️: ${word.pronunciation})</h1>
+            <h1 class="text-3xl font-bold">${
+              word.word
+            } (<i onclick="pronounceWord(${
+    word.word
+  })" class="fa-solid fa-microphone-lines"></i>: ${word.pronunciation})</h1>
             <div>
               <p class="font-semibold pb-2">Meaning</p>
               <p>${word.meaning}</p>
@@ -108,9 +128,7 @@ const displayModal = (word) => {
             </div>
             <div>
               <h3 class="font-semibold pb-2">সমার্থক শব্দ গুলো</h3>
-              <label class="btn">${word.synonyms[0]}</label>
-              <label class="btn">${word.synonyms[1]}</label>
-              <label class="btn">${word.synonyms[2]}</label>
+              <div>${showSyn(word.synonyms)}</div>
               
             </div>
           </div>
@@ -118,6 +136,7 @@ const displayModal = (word) => {
   my_modal_5.showModal();
 };
 
+// Lesson button display
 const displayLesson = (lessonData) => {
   const container = document.getElementById("lesson-container");
   container.innerHTML - "";
