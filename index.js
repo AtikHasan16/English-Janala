@@ -18,6 +18,7 @@ const displayLevel = (level) => {
 
   if (level.length == 0) {
     wordContainer.innerHTML = `<div class="p-10">
+    <img class="mx-auto" src="./assets/alert-error.png" alt="">
       <p class="text-lg mb-5">এখানে এখনো কোন Lesson যুক্ত করা হয়নি
 </p>
       <h1 class="text-4xl font-bold">পরের Lesson Select করুন।</h1>
