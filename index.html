@@ -126,7 +126,7 @@
     </dialog>
 
     <!-- Lesson banner  -->
-    <section class="poppins mb-20">
+    <section class="poppins mb-10">
       <h1 class="text-5xl font-bold text-center mb-10">
         <label class="text-sky-500">Let's</label> Learn Vocabulary
       </h1>
@@ -135,6 +135,23 @@
         class="w-11/12 mx-auto flex gap-5 flex-wrap justify-center mb-10"
       ></div>
     </section>
+
+    <!-- search bar -->
+    <div class="join flex justify-center items-center pb-10">
+      <div>
+        <label class="input validator join-item">
+          <input
+            id="search-input"
+            class="text-xl poppins"
+            type="text"
+            placeholder="Search your Vocabulary"
+          />
+        </label>
+      </div>
+      <button id="search-btn" class="btn btn-primary join-item text-lg">
+        Search
+      </button>
+    </div>
     <!-- Loading spinner -->
     <section id="spinner" class="text-center py-10 hidden">
       <span class="loading loading-dots loading-xl"></span>
